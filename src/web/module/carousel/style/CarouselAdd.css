@@ -1,0 +1,45 @@
+.carousel {
+    margin-left: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-input-2 h3 span {
+    color: #ff0000;
+    /* 設定文字顏色為紅色 */
+    font-size: 14px;
+    /* 設定字體大小 */
+}
+
+.add-input {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.add-input-text {
+    height: 33px;
+    width: 250px;
+}
+
+.add-input-2 {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+}
+
+.previews {
+    width: 25%;
+    height: 25%;
+    margin-left: 500px;
+}
+
+.carousel-btn {
+    margin-top: 20px;
+}
