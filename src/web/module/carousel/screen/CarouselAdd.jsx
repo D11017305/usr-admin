@@ -5,6 +5,7 @@ import "../style/CarouselAdd.css";
 
 export default function CarouselAdd() {
 
+    const navigate = useNavigate();
     const [files, setFiles] = useState([]);
     const [previews, setPreviews] = useState([]);
 
@@ -17,6 +18,10 @@ export default function CarouselAdd() {
             setPreviews([]);
         }
     }, [files]);
+
+    const handleRedirect = () => {
+        navigate('/carousel'); // 將 '/home' 替換為你想要的重定向路徑
+    };
 
     return (
         <div className='carousel'>
@@ -47,7 +52,7 @@ export default function CarouselAdd() {
 
             <div className='carousel-btn'>
                 <Button variant="contained" style={{ backgroundColor: '#ECE6F0', color: 'black', marginRight: '30px' }}>確定新增</Button>
-                <Button variant="contained" style={{ backgroundColor: '#ECE6F0', color: 'black' }}>取消新增</Button>
+                <Button variant="contained" style={{ backgroundColor: '#ECE6F0', color: 'black' }} onClick={handleRedirect}>取消新增</Button>
             </div>
         </div>
     );

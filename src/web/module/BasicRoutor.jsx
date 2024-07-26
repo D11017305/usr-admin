@@ -3,15 +3,19 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Button } from "@mui/material";
 import "./menu.css";
 import logoImage from "./logo.png";
+import Home from "../_basic/components/index";
 import Carousel from "../module/carousel/screen/Carousel";
 import CarouselAdd from './carousel/screen/CarouselAdd';
-import Activity from "../module/activity/screen/Activity";
+import Activity from './activity/screen/Activity';
+import ActivityAdd from './activity/screen/ActivityAdd';
 import Service from "../module/service/screen/service";
 import News from "../module/news/screen/News";
+import NewsAdd from "../module/news/screen/NewsAdd";
+import ImportLink from "../module/link/srceen/Link";
+import ImportLinkAdd from "../module/link/srceen/LinkAdd";
 
 
 export default function BasicRoutor() {
-
 
     // const [anchorEl, setAnchorEl] = useState(null);
     // const [articleAnchorEl, setArticleAnchorEl] = useState(null);
@@ -25,10 +29,10 @@ export default function BasicRoutor() {
 
     const menuItems = [
         { name: '輪播圖', path: '/carousel' },
-        { name: '成果展現', path: '/achievements' },
-        { name: '服務足跡', path: '/service-footprints' },
-        { name: '亮點報導', path: '/highlights' },
-        { name: '重要連結', path: '/important-links' },
+        { name: '成果展現', path: '/activity' },
+        { name: '服務足跡', path: '/service' },
+        { name: '亮點報導', path: '/news' },
+        { name: '重要連結', path: '/links' },
     ];
 
 
@@ -38,7 +42,10 @@ export default function BasicRoutor() {
             <div>
 
                 <div className="top-container">
-                    <img src={logoImage} alt="logo" className="logo-main" />
+                    <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+                        <img src={logoImage} alt="logo" className="logo-main" />
+                    </Link>
+
                     <div className="line"></div>
                 </div>
                 <div className="body-container">
@@ -60,12 +67,16 @@ export default function BasicRoutor() {
                     </div>
                     <div className="right-content">
                         <Routes>
+                            <Route path="/" element={<Home />} />
                             <Route path="/carousel" element={<Carousel />} />
                             <Route path="/carousel/add" element={<CarouselAdd />} />
-                            <Route path="/activities" element={<Activity />} />
-                            <Route path="/services" element={<Service />} />
+                            <Route path="/activity" element={<Activity />} />
+                            <Route path="/activity/add" element={<ActivityAdd />} />
+                            <Route path="/service" element={<Service />} />
                             <Route path="/news" element={<News />} />
-                            <Route path="/links" element={<Link />} />
+                            <Route path="/news/add" element={<NewsAdd />} />
+                            <Route path="/links" element={<ImportLink />} />
+                            <Route path="/links/add" element={<ImportLinkAdd />} />
                         </Routes>
                     </div>
                 </div>

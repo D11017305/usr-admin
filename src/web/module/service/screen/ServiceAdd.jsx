@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import "../style/ActivityAdd.css";
+import "../style/ServiceAdd.css";
 
 export default function CarouselAdd() {
 
@@ -24,7 +24,7 @@ export default function CarouselAdd() {
     }, [files]);
 
     const handleRedirect = () => {
-        navigate('/activity'); // 將 '/home' 替換為你想要的重定向路徑
+        navigate('/service'); // 將 '/home' 替換為你想要的重定向路徑
     };
 
     return (

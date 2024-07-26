@@ -32,26 +32,28 @@ export default function Index({ initialData = [], onEdit, onDelete, initialPage 
     const currentData = data.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
+        <>
+        </>
 
-        <div>
+        //     <div>
 
-            <Button variant="contained" style={{ backgroundColor: '#94BD90' }}>+ 新增</Button>
+        //         <Button variant="contained" style={{ backgroundColor: '#94BD90' }}>+ 新增</Button>
 
-            {/* <div className="pagination">
-        <button onClick={() => handlePageChange(1)} disabled={currentPage === 1}>&laquo;&laquo;</button>
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>&laquo;</button>
-        {[...Array(totalPages)].map((_, index) => (
-            <button
-                key={index}
-                onClick={() => handlePageChange(index + 1)}
-                className={currentPage === index + 1 ? 'active' : ''}
-            >
-                {index + 1}
-            </button>
-        ))}
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>&raquo;</button>
-        <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>&raquo;&raquo;</button>
-    </div> */}
-        </div>
+        //         {/* <div className="pagination">
+        //     <button onClick={() => handlePageChange(1)} disabled={currentPage === 1}>&laquo;&laquo;</button>
+        //     <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>&laquo;</button>
+        //     {[...Array(totalPages)].map((_, index) => (
+        //         <button
+        //             key={index}
+        //             onClick={() => handlePageChange(index + 1)}
+        //             className={currentPage === index + 1 ? 'active' : ''}
+        //         >
+        //             {index + 1}
+        //         </button>
+        //     ))}
+        //     <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>&raquo;</button>
+        //     <button onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages}>&raquo;&raquo;</button>
+        // </div> */}
+        //     </div>
     );
 }
