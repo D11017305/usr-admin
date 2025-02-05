@@ -8,35 +8,36 @@ const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // const correctUsername = '2024UsrAd';
-    // const correctPassword = 'P@55w0rd#7Xz';
-    const correctUsername = '';
-    const correctPassword = '';
 
-    const handleSubmit  = (event) => {
-    event.preventDefault();
-
-        try{
-            const formData = new FormData();
-                formData.append('username', username);
-                formData.append('password', password); 
-            LoginApi.postLogin(formData);
-            // console.log(data);
-            onLogin();
-        }catch(e){
-            console.log("登入失敗，帳號或密碼錯誤",e);
-        }
+    const handleSubmit  = async (event) => {
+        event.preventDefault();
     
-        // if (username === correctUsername && password === correctPassword) {
-        //     onLogin();  // 登入成功後執行 onLogin
-        // } else {
-        //     alert('帳號或密碼錯誤');  // 顯示錯誤信息
-        // }
+        try {
+            const response = await LoginApi.postLogin({
+                username,
+                password
+            });
+    
+            console.log("API 回應:", response); // 檢查 API 返回的資料
+    
+            // 檢查 API 是否成功，假設 API 成功時返回 { success: true }
+            if (response == "Login successful!") {
+                console.log("登入成功");
+                if (onLogin) {
+                    onLogin(); 
+                }
+            } else {
+                throw new Error(response.message || "登入失敗");
+            }
+        } catch (e) {
+            console.error("登入失敗", e);
+            alert(e.message || '帳號或密碼錯誤');
+        }
     };
+    
 
     return (
         <>
-        <form onSubmit={handleSubmit}>
             <div className="login-container">
                 <div className="logcontain">
                     <img src={logoImage} alt="logo" className="logo" />
@@ -61,11 +62,10 @@ const Login = ({ onLogin }) => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <button type="submit" className='btnIn'>登入</button>
+                        <button type="submit" className='btnIn' onClick={handleSubmit}>登入</button>
                     </div>
                 </div>
             </div>
-        </form>
         </>
     );
 };
