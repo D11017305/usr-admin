@@ -45,6 +45,7 @@ export default function Carousel() {
     return (
         <>
             <div>
+            <h1 style={{ marginTop: '-10px', marginLeft: '45%' }}>輪播圖</h1>
                 <Button variant="contained" style={{ backgroundColor: '#94BD90', marginBottom: '30px' }} onClick={() => handleOpen(null, 'edit')}> + 新增 </Button>
                 <TableComponent
                     columns={carouselColumns}

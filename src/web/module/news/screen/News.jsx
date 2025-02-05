@@ -46,6 +46,7 @@ export default function News(){
 
     return(
         <>
+        <h1 style={{ marginTop: '-10px', marginLeft: '45%' }}>亮點報導</h1>
             <div>
                 <Button variant="contained" style={{ backgroundColor: '#94BD90', marginBottom: '30px' }} onClick={() => handleOpen(null, 'edit')}>+ 新增</Button>
                 <TableComponent

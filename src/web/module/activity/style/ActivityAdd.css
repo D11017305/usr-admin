@@ -1,3 +1,19 @@
+.activity {
+    margin-left: 50px;
+
+}
+
+.add-input-3 {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+/* 調整選擇日期後輸入框中文字的字體大小 */
+.react-datepicker__input-container input {
+    font-size: 18px;
+    /* 調整為你需要的字體大小 */
+}
 .add-input-2 h3 span {
     color: #ff0000;
     /* 設定文字顏色為紅色 */
