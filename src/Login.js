@@ -18,7 +18,7 @@ const Login = ({ onLogin }) => {
                 password
             });
     
-            console.log("API 回應:", response); // 檢查 API 返回的資料
+            // console.log("API 回應:", response); // 檢查 API 返回的資料
     
             // 檢查 API 是否成功，假設 API 成功時返回 { success: true }
             if (response == "Login successful!") {
