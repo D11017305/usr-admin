@@ -24,7 +24,7 @@
 }
 
 .left-menu {
-    background-color: #A2C4A4;
+    background-color: #ffffff;
     width: 200px;
     height: auto;
     padding: 20px;
@@ -41,7 +41,7 @@
 .menu-item {
     padding: 10px;
     margin-bottom: 10px;
-    background-color: #F5F5DC;
+    background-color: #94BD90;
     border-radius: 5px;
     cursor: pointer;
     ;
@@ -56,4 +56,17 @@
     width: 80%;
     height: 99%;
     padding: 10px;
+}
+
+/* 當前頁面選中的按鈕 */
+.active-link .menu-button {
+    color: rgb(255, 255, 255) !important;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* 其他未選中的按鈕 */
+.inactive-link .menu-button {
+    color: black !important;
+    font-size: 18px;
 }
