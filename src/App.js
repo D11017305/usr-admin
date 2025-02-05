@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Login from '../src/Login';
+import logo from "./logo2.png";
 import BasicRoutor from './web/module/BasicRoutor';
 
 export default function App() {
@@ -11,7 +12,16 @@ export default function App() {
     setIsAuthenticated(true);
   };
 
+  useEffect(() => {
+    document.title = '德明財經科技大學USR';
+  }, []);
+
   return (
+    <>
+    <Helmet>
+        <meta name="description" content="For TMUST USR" />
+        <meta property="og:image" content={logo} />
+      </Helmet>
     <Router>
       <div className="App">
         {isAuthenticated ? (
@@ -23,5 +33,6 @@ export default function App() {
         )}
       </div>
     </Router>
+    </>
   );
 }

@@ -1,106 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, Routes, Route } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Box, Button, Modal, Typography } from '@mui/material';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useEffect, useState } from 'react';
+import { CarouselApi } from '../../../_basic/Protocol/CarouselApi';
+import TableComponent from '../../../_basic/components/TableComponent';
 import "../style/Carousel.css";
-import CarouselAdd from "../../carousel/screen/CarouselAdd";
-import CarouselEdit from "../screen/CarouselEdit";
+import CarouselDelete from './CarouselDelete';
+import CarouselForm from './CarouselForm';
 
 export default function Carousel() {
-
     const [data, setData] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(10);
-    const [totalPages, setTotalPages] = useState(0);
-    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+    const [currentRecord, setCurrentRecord] = useState(null);
+    const [actionType,setActionType] = useState(null);
+    const carouselColumns = ['編號', '活動名稱', '圖片', '導入日期', '功能'];
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('https://api.example.com/data');
-                const result = await response.json();
-                setData(result);
-                setTotalPages(Math.ceil(result.length / itemsPerPage));
+                const response = await CarouselApi.getAllCarousel();
+                if (Array.isArray(response)) {
+                    setData(response);
+                } else {
+                    console.error("取得所有輪播圖失敗");
+                }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error("取得所有輪播圖失敗", error);
             }
         };
-
         fetchData();
-    }, [itemsPerPage]);
+    }, []);
 
-    const handleEdit = (id) => {
-        navigate('edit');
-        alert(`編輯項目: ${id}`);
+    const handleOpen = (record, type) => {
+        setCurrentRecord(record);
+        setActionType(type); // 設置操作類型
+        setOpen(true);
     };
 
-    const handleDelete = (id) => {
-        navigate('delete');
-        alert(`刪除項目: ${id}`);
+    const handleClose = () => {
+        setOpen(false);
+        setCurrentRecord(null);
+        setActionType(null);
     };
-
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
-
-    const handleAdd = () => {
-        navigate('add');
-    };
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentData = data.slice(startIndex, endIndex);
 
     return (
         <>
             <div>
-                <div>
-                    <Button variant="contained"
-                        style={{ backgroundColor: '#94BD90', marginBottom: '30px' }}
-                        onClick={handleAdd}>+ 新增</Button>
-                </div>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>編號</th>
-                            <th>圖片</th>
-                            <th>活動日期</th>
-                            <th>導入日期</th>
-                            <th>功能</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {currentData.map((item) => (
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>
-                                    <img src={item.image} alt={`${item.name}`} width="50" />
-                                </td>
-                                <td>{item.eventDate}</td>
-                                <td>{item.importDate}</td>
-                                <td>
-                                    <button className="button edit" onClick={() => handleEdit(item.id)}>編輯</button>
-                                    <button className="button delete" onClick={() => handleDelete(item.id)}>刪除</button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                <div className="pagination">
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <Button
-                            key={index}
-                            variant="text"
-                            onClick={() => handlePageChange(index + 1)}
-                            style={{ margin: '0 5px', color: currentPage === index + 1 ? 'blue' : 'black' }}
-                        >
-                            {index + 1}
-                        </Button>
-                    ))}
-                </div>
+                <Button variant="contained" style={{ backgroundColor: '#94BD90', marginBottom: '30px' }} onClick={() => handleOpen(null, 'edit')}> + 新增 </Button>
+                <TableComponent
+                    columns={carouselColumns}
+                    data={data}
+                    onEdit={(record) => handleOpen(record, 'edit')} // 點擊編輯時開啟編輯模式
+                    onDelete={(record) => handleOpen(record, 'delete')} // 點擊刪除時開啟刪除模式
+                />
             </div>
-            <Routes>
-                <Route path="add" element={<CarouselAdd />} />
-            </Routes>
+
+            <Modal open={open} onClose={handleClose}>
+                <Box sx={{ width: 400, padding: 4, margin: '100px auto', backgroundColor: 'white', borderRadius: 2 }}>
+                    <Typography variant="h6" component="h5">
+                        {actionType === 'edit' ? (currentRecord ? "修改輪播圖" : "新增輪播圖") : "刪除輪播圖"}
+                    </Typography>
+                    {actionType === 'edit' ? (
+                        <CarouselForm closeModal={handleClose} record={currentRecord} setData={setData} />
+                    ) : (
+                        <CarouselDelete closeModal={handleClose} record={currentRecord} setData={setData} />
+                    )}
+                </Box>
+            </Modal>
+            
         </>
     );
 }

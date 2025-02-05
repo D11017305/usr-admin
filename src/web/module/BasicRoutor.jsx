@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Button } from "@mui/material";
-import "./menu.css";
-import logoImage from "./logo.png";
-import Carousel from "../module/carousel/screen/Carousel";
-import CarouselAdd from './carousel/screen/CarouselAdd';
+import React from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
 import Activity from "../module/activity/screen/Activity";
-import Service from "../module/service/screen/service";
+import Carousel from "../module/carousel/screen/Carousel";
 import News from "../module/news/screen/News";
+import Service from "../module/service/screen/service";
+import HomeMap from "./homemap/screen/HomeMap";
+import ImportantLink from "./importLink/srceen/ImportLink";
+import logoImage from "./logo.png";
+import "./menu.css";
+import Partner from "./partner/screen/partner";
+import Report from "./report/screen/Report";
 
 
 export default function BasicRoutor() {
@@ -25,10 +28,14 @@ export default function BasicRoutor() {
 
     const menuItems = [
         { name: '輪播圖', path: '/carousel' },
-        { name: '成果展現', path: '/achievements' },
-        { name: '服務足跡', path: '/service-footprints' },
-        { name: '亮點報導', path: '/highlights' },
-        { name: '重要連結', path: '/important-links' },
+        { name: '成果展現', path: '/activities' },
+        { name: '服務足跡', path: '/services' },
+        { name: '亮點報導', path: '/news' },
+        { name: '重要連結', path: '/links' },
+        { name: '合作夥伴', path: '/partner' },
+        { name: '年度報告', path: '/report' },
+        { name: '首頁地圖', path: '/homemap'}
+        // { name: '入站人數', path: '/traffic'},
     ];
 
 
@@ -36,7 +43,6 @@ export default function BasicRoutor() {
     return (
         <>
             <div>
-
                 <div className="top-container">
                     <img src={logoImage} alt="logo" className="logo-main" />
                     <div className="line"></div>
@@ -60,12 +66,15 @@ export default function BasicRoutor() {
                     </div>
                     <div className="right-content">
                         <Routes>
-                            <Route path="/carousel" element={<Carousel />} />
-                            <Route path="/carousel/add" element={<CarouselAdd />} />
-                            <Route path="/activities" element={<Activity />} />
-                            <Route path="/services" element={<Service />} />
-                            <Route path="/news" element={<News />} />
-                            <Route path="/links" element={<Link />} />
+                            <Route path="/carousel/*" element={<Carousel />} />
+                            <Route path="/activities/*" element={<Activity />} />
+                            <Route path="/services/*" element={<Service />} />
+                            <Route path="/news/*" element={<News />} />
+                            <Route path="/links/*" element={<ImportantLink />} />
+                            <Route path="/partner/*" element={<Partner />} />
+                            <Route path="/report/*" element={<Report />} />
+                            <Route path="/homemap/*" element={<HomeMap/>}/>
+                            {/* <Route path="/traffic" element={<Traffic />} /> */}
                         </Routes>
                     </div>
                 </div>
