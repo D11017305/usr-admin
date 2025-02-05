@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import Home from "../_basic/components/index";
 import Activity from "../module/activity/screen/Activity";
 import Carousel from "../module/carousel/screen/Carousel";
@@ -55,14 +55,15 @@ export default function BasicRoutor() {
                         <ul className="menu-list">
                             {menuItems.map((item, index) => (
                                 <li key={index} className="menu-item">
-                                    <Button
-                                        component={Link}
+                                    <NavLink
                                         to={item.path}
-                                        variant="text"
-                                        style={{ color: "black", fontSize: '18px' }}
+                                        end
+                                        className={({ isActive }) => (isActive ? "active-link" : "inactive-link")}
                                     >
-                                        {item.name}
-                                    </Button>
+                                        <Button variant="text" className="menu-button">
+                                            {item.name}
+                                        </Button>
+                                    </NavLink>
                                 </li>
                             ))}
                         </ul>
